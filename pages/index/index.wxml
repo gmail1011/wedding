@@ -1,0 +1,12 @@
+
+<import src="../../templates/common-list.wxml" />
+<import src="../../templates/copyright.wxml" />
+ <view>
+  <swiper class="swiper" indicator-dots="true" autoplay="true" interval="5000" duration="1000">  
+      <block wx:for="{{images}}" wx:for-index="index">  
+        <swiper-item wx:key="{{item.url}}">  
+          <image src="{{item.url}}" class="slide-image" mode="aspectFill"/>  
+        </swiper-item>  
+      </block>  
+    </swiper> 
+</view>

@@ -1,0 +1,66 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/popular/popular",
+    "pages/coming/coming",
+    "pages/top/top",
+    "pages/search/search",
+    "pages/filmDetail/filmDetail",
+    "pages/personDetail/personDetail",
+    "pages/searchResult/searchResult",
+    "pages/my/my",
+    "pages/favorite/favorite",
+    "pages/history/history",
+    "pages/shake/shake",
+    "pages/gallery/gallery",
+    "pages/setting/setting",
+    "pages/skin/skin",
+    "pages/personInfo/personInfo",
+    "pages/editPersonInfo/editPersonInfo",
+    "pages/systemInfo/systemInfo",
+    "pages/about/about",
+    "pages/location/location"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "selectedColor": "#009fe8",
+    "borderStyle": "#00f7f7fa",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/home.png",
+        "text": "七夕礼物",
+        "selectedIconPath": "images/home_active.png"
+      },
+      {
+        "pagePath": "pages/coming/coming",
+        "iconPath": "images/prize.png",
+        "text": "有奖竞答",
+        "selectedIconPath": "images/prize_active.png"
+      },
+      {
+        "pagePath": "pages/top/top",
+        "iconPath": "images/love.png",
+        "text": "Vip学员",
+        "selectedIconPath": "images/love_active.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "iconPath": "images/person.png",
+        "text": "动脑学院",
+        "selectedIconPath": "images/person_active.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "connectSocket": 10000,
+    "uploadFile": 10000,
+    "downloadFile": 10000
+  }
+}
