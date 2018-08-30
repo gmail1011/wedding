@@ -16,21 +16,25 @@
     <view class="select-top">
       <view class="select-top-small">
         <navigator url="list/list">
-          <image src="/images/s1.png"></image>
+          <image src="/images/img_s1.png"></image>
         </navigator>
       </view>
-      <view class="select-top-small">
+      <view class="select-top-small" bindtap='playVideo'>
         <navigator url="list/list">
-          <image src="/images/s2.png"></image>
+          <image src="/images/img_s2.png"></image>
         </navigator>
       </view>
     </view>
-    <view class="select-bottom">
-      <navigator url="list/list">
-        <image src="/images/s3.png"></image>
-      </navigator>
+
+     <view class="select-title">
+      <text>新人视频</text>
     </view>
-<view class="select-top">
+  <view class="select-bottom">
+    <navigator url="list/list">
+      <image src="/images/img_s3.png" mode="widthFix"></image>
+    </navigator>
+  </view>
+    <view class="select-top">
       <view class="select-top-small">
         <navigator url="list/list">
           <image src="/images/s1.png"></image>

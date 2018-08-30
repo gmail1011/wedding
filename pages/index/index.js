@@ -52,6 +52,11 @@ Page({
       url: '../logs/logs'
     })
   },
+  playVideo:function(event){
+    wx.navigateTo({
+      url: '../video/video'
+    })
+  },
   onLoad: function () {
     this.loadSocket();
     console.log("----------===" + this.data.canIUse)

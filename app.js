@@ -5,7 +5,7 @@ App({
     console.log("-------------========")
     console.log(data)
       wx.request({
-        url: 'http://dengpaoedu.com/weixin/user/login',
+        url: host+'user/login',
         data: data,  
       success: (res => {
         console.log("----------------")

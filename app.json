@@ -19,13 +19,16 @@
     "pages/editPersonInfo/editPersonInfo",
     "pages/systemInfo/systemInfo",
     "pages/about/about",
-    "pages/location/location"
+    "pages/location/location",
+    "pages/video/video"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "black",
+   "enablePullDownRefresh": true,
+  "onReachBottom": true
   },
   "tabBar": {
     "selectedColor": "#009fe8",

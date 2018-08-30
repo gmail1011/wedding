@@ -3,11 +3,12 @@ var app = getApp();
 Page({
   data:{
     gridList: [
-      {enName:'favorite', zhName:'收藏'},
-      {enName:'history', zhName:'浏览记录'},
-      {enName:'shake', zhName:'摇一摇'},
-      {enName:'gallery', zhName:'相册'},
-      {enName:'setting', zhName:'设置'}
+      { enName: 'favorite', text: '我的家族', icon:"icon_user_home.png"},
+      { enName: 'history', text: '我的收藏',icon:"icon_collection.png"},
+      { enName: 'shake', text: '浏览记录', icon: "icon_user_history.png"},
+      { enName: 'gallery', text: '婚礼中奖', icon: "icon_user_prize.png"},
+      { enName: 'setting', text: '祝福相册', icon: "icon_user_image.png"},
+      { enName: 'setting', text: '设置', icon: "icon_user_setting.png"}
     ],
     skin: ''
   },

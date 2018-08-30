@@ -1,3 +1,5 @@
+
+var host = "http://dengpaoedu.com/weixin/";
 function formatTime(time) {
   if (typeof time !== 'number' || time < 0) {
     return time
@@ -39,5 +41,6 @@ function getTime() {
 module.exports = {
   formatTime: formatTime,
   getDate: getDate,
-  getTime: getTime
+  getTime: getTime,
+  host: host
 }
