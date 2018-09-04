@@ -1,11 +1,12 @@
 //app.js
+var util = require("./util/util")
 App({
 
   login_weixin: function (data) {
     console.log("-------------========")
     console.log(data)
       wx.request({
-        url: host+'user/login',
+        url: util.host+'user/login',
         data: data,  
       success: (res => {
         console.log("----------------")
@@ -23,7 +24,6 @@ App({
         if (this._errorHandler != null) {
           this._errorHandler(res)
         }
-        reject(res)
       }) 
 
     })

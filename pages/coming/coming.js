@@ -26,7 +26,7 @@ Page({
 
     console.log("====222======" + host + "video/list")
     wx.request({
-      url: host +"video/list",
+      url: util.host +"video/list",
       data: data,
       success: (res => {
         console.log("----------------")
@@ -37,7 +37,7 @@ Page({
           this.globalData.userId = res.data.userId
         } else {
           //其它错误，提示用户错误信息
-
+ 
         }
       }),
       fail: (res => {
