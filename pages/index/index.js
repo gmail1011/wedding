@@ -6,7 +6,7 @@ var socketOpen = false
 var socketMsgQueue = []
 Page({
   data: {
-    images: [],
+    images: [{ url: "../../images/img_1.jpg" }, { url: "../../images/img_2.jpg" }, { url: "../../images/img_3.jpg" }, { url: "../../images/img_4.jpg" },],
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
@@ -19,16 +19,14 @@ Page({
       success: function (res) {
         console.log("======连接成功");
 
-
-
       },
       fail: function () {
         console.log("======连接成功失败");
-      }
-    })
+      } 
+    }) 
 
     wx.onSocketOpen(function (res) {
-   
+    
       socketOpen = true
       for (var i = 0; i < socketMsgQueue.length; i++) {
         sendSocketMessage(socketMsgQueue[i])
@@ -36,13 +34,15 @@ Page({
       socketMsgQueue = []
     })
     wx.onSocketMessage(function (res) {
-      console.log("======收到消息===="+res.data);
+     
       let message=JSON.parse(res.data);
+      console.log("======收到消息====" + res.data + "   " + message.anwserType);
       if (message.anwserType==1){
-
-
-      } else if (message.anwserType == 1) {
-          // 选择题
+        console.log("=====11111111111");
+        // 选择题
+        wx.navigateTo({
+          url: '../singleChoiceDetail/singleChoiceDetail?data=' + res.data
+        });
 
       } else if (message.anwserType == 2) {
         // 问答题
@@ -52,10 +52,7 @@ Page({
 
       } else if (message.anwserType ==4) {
       // 点赞倒计时题
-
       }
-
-
     })
 
 
@@ -73,59 +70,40 @@ Page({
     })
   },
   onLoad: function () {
-    this.loadSocket();
-    console.log("----------===" + this.data.canIUse)
-    console.log(app.globalData.userInfo)
+   
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
       })
-    } else if (this.data.canIUse) {
+    } else if (true) {
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {
-
         this.setData({
           userInfo: res.userInfo,
           hasUserInfo: true
         })
-
       }
     } else {
       // 在没有 open-type=getUserInfo 版本的兼容处理
       wx.getUserInfo({
         success: res => {
+         
           app.globalData.userInfo = res.userInfo
           this.setData({
             userInfo: res.userInfo,
             hasUserInfo: true
           })
-
         }
       })
     }
+    this.loadSocket();
   },
   onLaunch: function () {
 
   },
   onShow: function () {
-
-    wx.request({
-      url: util.host +'images/list',
-      success: (res => {
-        console.log("++++++++++")
-        console.log(res)
-        if (res.data.code === 0) {
-          console.log(res.data.data)
-          this.setData({
-            images: res.data.data,
-          })
-        } else {
-
-        }
-      }),
-    })
   },
 
   getUserInfo: function (e) {

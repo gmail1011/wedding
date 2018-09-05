@@ -3,7 +3,7 @@ var Bmob = require('../../utils/bmob.js');
 Page({
 
   data: {
-    singleQuestionList:[],
+    singleQuestionList: [{ title: "谁是最美的新娘", number: 12, options:["胡秋蓉","张三","李四","王五"], correctAnswer: ["A"], userChose:["B"]}],
     multiQuestionList:[],
     choseType:'',
     nowQuestion:[],
@@ -11,59 +11,62 @@ Page({
     userAnswer:'',
     loading:true
     
-  },  
-
+  },   
+ 
   onLoad: function (options) {
     that = this;
     var index = options.index;
     var choseType = options.choseType;
-    console.log(index);
-    console.log(choseType);
     var choseQuestionBank = getApp().globalData.choseQuestionBank;
-    var currentUser = Bmob.User.current();
-    var currentUserId = currentUser.id;
     var History = Bmob.Object.extend("history");
     var queryHistory = new Bmob.Query(History);
-    queryHistory.equalTo("choseQuestionBank", choseQuestionBank);
-    queryHistory.equalTo("user", currentUserId);
-    queryHistory.find({
-      success: function (results) {
-        var singleQuestionList = results[0].attributes.singleQuestionList;
-        var multiQuestionList = results[0].attributes.multiQuestionList;
-        that.setData({
-          singleQuestionList: singleQuestionList,
-          multiQuestionList: multiQuestionList,
-          choseType: choseType
-        });
-        if (choseType == 'single') {
-          var nowQuestion = that.data.singleQuestionList[index];
-          var correctAnswer = results[0].attributes.singleQuestionList[index].answer[0];
-          var userAnswer = results[0].attributes.singleQuestionList[index].userChose[0];
-          that.setData({
-            nowQuestion: nowQuestion,
-            correctAnswer: correctAnswer,
-            userAnswer: userAnswer,
-            loading: false
-          });
-        }
-        else if (choseType == 'multi') {
-          var nowQuestion = that.data.multiQuestionList[index]
-          var correctAnswerList = results[0].attributes.multiQuestionList[index].answer;
-          var correctAnswer = correctAnswerList.toString()
-          var userAnswerList = results[0].attributes.multiQuestionList[index].userChose;
-          var userAnswer = userAnswerList.toString()
-          that.setData({
-            nowQuestion: nowQuestion,
-            correctAnswer: correctAnswer,
-            userAnswer: userAnswer,
-            loading:false
-          });
-        }
-      },
-      error: function (error) {
-        console.log("查询失败: " + error.code + " " + error.message);
-      }
-    });
+      var nowQuestion = that.data.singleQuestionList[0];
+      console.log(nowQuestion)
+      that.setData({
+        nowQuestion,
+        correctAnswer: "胡秋蓉",
+        userAnswer: "胡秋蓉",
+        loading: false
+      });
+    // queryHistory.find({
+    //   success: function (results) {
+    //     // var singleQuestionList = results[0].attributes.singleQuestionList;
+    //     var multiQuestionList = results[0].attributes.multiQuestionList;
+    //     that.setData({
+    //       // singleQuestionList: singleQuestionList,
+    //       multiQuestionList: multiQuestionList,
+    //       choseType: choseType
+    //     });
+    //     console.log(that.data.singleQuestionList)
+    //     if (choseType == 'single') {
+    //       var nowQuestion = that.data.singleQuestionList[index];
+    //       var correctAnswer = results[0].attributes.singleQuestionList[index].answer[0];
+    //       var userAnswer = results[0].attributes.singleQuestionList[index].userChose[0];
+    //       that.setData({
+    //         nowQuestion: nowQuestion,
+    //         correctAnswer: correctAnswer,
+    //         userAnswer: userAnswer,
+    //         loading: false
+    //       });
+    //     }
+    //     else if (choseType == 'multi') {
+    //       var nowQuestion = that.data.multiQuestionList[index]
+    //       var correctAnswerList = results[0].attributes.multiQuestionList[index].answer;
+    //       var correctAnswer = correctAnswerList.toString()
+    //       var userAnswerList = results[0].attributes.multiQuestionList[index].userChose;
+    //       var userAnswer = userAnswerList.toString()
+    //       that.setData({
+    //         nowQuestion: nowQuestion,
+    //         correctAnswer: correctAnswer,
+    //         userAnswer: userAnswer,
+    //         loading:false
+    //       });
+    //     }
+    //   },
+    //   error: function (error) {
+    //     console.log("查询失败: " + error.code + " " + error.message);
+    //   }
+    // });
   },
 
 

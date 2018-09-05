@@ -20,7 +20,8 @@
     "pages/systemInfo/systemInfo",
     "pages/about/about",
     "pages/location/location",
-    "pages/video/video"
+    "pages/video/video",
+    "pages/singleChoiceDetail/singleChoiceDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",
