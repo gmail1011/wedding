@@ -13,6 +13,11 @@
     background-size: cover;
     color: #666;
 }
+.container{
+ position: relative;
+  top: -200rpx;
+
+}
 .user_setting{
     position: relative;
     width: 100%;

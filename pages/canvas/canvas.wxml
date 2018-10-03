@@ -1,8 +1,8 @@
 <view class="wrapper">
 
 	<view class="header">
-		<text class="header-title"> 七夕大抽奖 </text>
-		<text class="header-subtitle">动脑大放送</text> 
+		<text class="header-title">喜庆婚礼 </text>
+		<text class="header-subtitle">随机获取幸运礼</text> 
 	</view>
 
 	<view class="main">
@@ -15,7 +15,6 @@
 				  		<text class="canvas-item-text" style="-webkit-transform: rotate({{item.turn}});transform: rotate({{item.turn}})">{{item.award}}</text>
 					</view>
 				</view>
-
 				
 			</view>
 
@@ -28,10 +27,7 @@
 			</view>
 			<view class="main-container-rule">
 				<text class="main-rule-title">活动规则：</text>
-				<text class="main-rule-item">1. 每天只能抽奖一次哦（并且在腾讯课堂听过动脑学院Android课程）</text>
-				<text class="main-rule-item">2.第一次没抽中  转发动脑学院微信说说可再免费抽一次</text>	
-				<text class="main-rule-item">3.抽到的奖品通过快递发到您的位置，动脑学院给您承担运费</text>	
-				<text class="main-rule-item">4.最终解释权贵动脑所有</text>	
+				<text class="main-rule-item">1. 每个微信号只能抽奖一次哦</text>
 			</view>	
 		</view>
 

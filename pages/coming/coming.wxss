@@ -2,7 +2,7 @@
 @import "../../component/message/message.wxss";
 .select-bottom,.select-top{
     width: 100%;
-    height: 400rpx;
+    height: 500rpx;
 }
 
 .item {
@@ -125,4 +125,35 @@
 .menu .iconfont {
     font-size: 26px;
     margin: 0
+    
+}
+
+.usermotto {
+  width: 100%;
+  height:700rpx;
+ 
+}
+.user-motto{
+   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+     font-size:xx-large;
+     flex-direction: column;
+     align-items: center;
+}
+.time_tile{
+  left: 100rpx;
+  top: 50rpx;
+  position: relative;
+}
+.time_content{
+  left: 100rpx;
+  top: 120rpx;
+  position: relative;
+}
+.user-motto1{
+   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+   font-size:x-large;
+}
+.page {
+  flex-direction: column;
+  align-items: center;
 }

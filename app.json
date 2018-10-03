@@ -8,7 +8,7 @@
     "pages/filmDetail/filmDetail",
     "pages/personDetail/personDetail",
     "pages/searchResult/searchResult",
-    "pages/my/my",
+    "pages/my/my", 
     "pages/favorite/favorite",
     "pages/history/history",
     "pages/shake/shake",
@@ -21,7 +21,11 @@
     "pages/about/about",
     "pages/location/location",
     "pages/video/video",
-    "pages/singleChoiceDetail/singleChoiceDetail"
+    "pages/singleChoiceDetail/singleChoiceDetail",
+    "pages/canvas/canvas",
+    "pages/detaillist/detaillist",
+    "pages/wedding/wedding",
+    "pages/map/map"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -38,25 +42,25 @@
       {
         "pagePath": "pages/index/index",
         "iconPath": "images/home.png",
-        "text": "七夕礼物",
+        "text": "婚礼",
         "selectedIconPath": "images/home_active.png"
       },
       {
-        "pagePath": "pages/coming/coming",
+        "pagePath": "pages/wedding/wedding",
         "iconPath": "images/prize.png",
-        "text": "有奖竞答",
+        "text": "婚礼邀请函",
         "selectedIconPath": "images/prize_active.png"
       },
       {
-        "pagePath": "pages/top/top",
+        "pagePath": "pages/map/map",
         "iconPath": "images/love.png",
-        "text": "Vip学员",
+        "text": "婚礼位置",
         "selectedIconPath": "images/love_active.png"
       },
       {
         "pagePath": "pages/my/my",
         "iconPath": "images/person.png",
-        "text": "动脑学院",
+        "text": "个人中心",
         "selectedIconPath": "images/person_active.png"
       }
     ]

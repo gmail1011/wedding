@@ -1,0 +1,8 @@
+<view>
+
+ 
+  <block class="log-list" wx:for="{{list}}" wx:for-item="item">
+    <image src='item.item' class='image'></image>
+    <text class="log-item">{{index + 1}}{{item.prizeName}}   </text>
+  </block> 
+</view>

@@ -6,29 +6,24 @@
 <view >
   <view class="c-top">
     <view class="c-video-img">
-      <video id="detailVideo"  bindplay="bindplay" bindpause="bindpause" class="i-video" wx:if="{{detail.isVideo}}" src="{{detail.videoUrl}}" bindtap="play"  ></video>
+      <video id="detailVideo"  bindplay="bindplay" bindpause="bindpause" class="i-video" wx:if="{{detail.isVideo}}" src="{{videoUrl}}" bindtap="play"  ></video>
       <image id="detailImg" mode='bottom right'  wx:if="{{hideImage}}"  class="i-img" src="{{detail.imgUrl}}"></image>
     </view>
 
     <!--简介-->
     <view class="t-info">
-      <view class="ti-top">
-        <text>400,000次播放</text>
-        <text>发表于：1小时前</text>
-      </view>
+      
       <view class="ti-content">
-        九九八十一难，最难过的，其实是女儿国这一关，因为比起其他的艰难困苦来说，此时的唐僧是真的动心了，一句“来生若有缘分”道尽一切，只是为了心中崇高的理想，纵使心动也要断绝柔情继续西行。为国王惋惜，同时也对唐僧充满崇敬，尤其是了解了史上真实的唐玄奘以后，更是觉得此人了不起。
+      涂程  &  胡秋蓉
       </view>
       <view class="ti-bottom">
         <view>
-          <text class="iconfont icon-my"></text><text>牧民新歌</text>
+          <text class="iconfont icon-my"></text><text>蜜月行</text>
         </view>
         <view>
-          <text class="iconfont icon-xihuan"></text><text>50,000喜欢</text>
+          <text class="iconfont icon-xihuan"></text><text>*喜欢</text>
         </view>
-        <view>
-          <text class="iconfont icon-pinglun1"></text><text>1000+评论</text>
-        </view>
+      
       </view>
     </view>
   </view>

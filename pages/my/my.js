@@ -6,8 +6,8 @@ Page({
       { enName: 'favorite', text: '我的家族', icon:"icon_user_home.png"},
       { enName: 'history', text: '我的收藏',icon:"icon_collection.png"},
       { enName: 'shake', text: '浏览记录', icon: "icon_user_history.png"},
-      { enName: 'gallery', text: '婚礼中奖', icon: "icon_user_prize.png"},
-      { enName: 'setting', text: '祝福相册', icon: "icon_user_image.png"},
+      { enName: 'canvas', text: '婚礼中奖', icon: "icon_user_prize.png"},
+      // { enName: 'setting', text: '祝福相册', icon: "icon_user_image.png"},
       { enName: 'setting', text: '设置', icon: "icon_user_setting.png"}
     ],
     skin: ''
@@ -15,10 +15,10 @@ Page({
   onLoad:function(cb){
     var that = this
     console.log(app.globalData.userInfo)
-    // 检测是否存在用户信息
+    // 检测是否存在用户信息 
     if (app.globalData.userInfo != null) {
       that.setData({
-          userInfo: app.globalData.userInfo
+          userInfo: app.globalData.userInfo 
       })
     } else {
       app.getUserInfo()
@@ -49,6 +49,7 @@ Page({
   },
   viewGridDetail: function(e) {
     var data = e.currentTarget.dataset
+ 
 		wx.navigateTo({
 			url: "../" + data.url + '/' + data.url
 		})

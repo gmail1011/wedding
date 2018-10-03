@@ -1,37 +1,21 @@
 
-
-
-
-
-
-
 var app = getApp()
+var util = require("../../util/util")
 Page({
   data: {
     awardsList: {},
     animationData: {},
-    btnDisabled: ''
+    btnDisabled: '',
+    awards:[]
   },
   onLoad:function(option){
+    var that=this;
     console.log("onLad---")
-      wx.request({
-        url: 'https://dongnaoedu.com',
-        data:{
-          x:1,
-          y:2
-        },
-        success:function(res){
-              console.log(res)
-        },
-        fail:function(res){
-          console.log("fail");
-          console.log(res)
-        }
-      })
+    
   },
   gotoList: function() {
-    wx.switchTab({
-      url: '../list/list'
+    wx.navigateTo({ 
+      url: '../detaillist/detaillist' 
     })
   },
   getLottery: function () {
@@ -71,108 +55,173 @@ Page({
     setTimeout(function() {
       wx.showModal({
         title: '恭喜',
-        content: '获得' + (awardsConfig.awards[awardIndex].name),
+        content: '获得' + (awardsConfig.awards[awardIndex].prizeName),
         showCancel: false
       })
-      if (awardsConfig.chance) {
+      console.log("----------->UserID  " + app.globalData.userId)
+      wx.request({
+        url: util.host + '/user/prize/addUserPrize',
+        data:{
+          prizeName: awardsConfig.awards[awardIndex].prizeName,
+          prizeId: awardsConfig.awards[awardIndex].prizeId,
+          userId: app.globalData.userId
+        },
+        success: function (res) {
+
+        },
+        fail: function (res) {
+          console.log("fail");
+          console.log(res)
+        }
+      })
+      if (awardsConfig.chance) { 
         that.setData({
-          btnDisabled: ''
+          btnDisabled: '' 
         })  
       }
     }, 4100);
-    
-
-    /*wx.request({
-      url: '../../data/getLottery.json',
-      data: {},
-      header: {
-          'Content-Type': 'application/json'
-      },
-      success: function(data) {
-        console.log(data)
-      },
-      fail: function(error) {
-        console.log(error)
-        wx.showModal({22222222
-          title: '抱歉',
-          content: '网络异常，请重试',
-          showCancel: false
-        })
-      }
-    })*/
   },
   onReady: function (e) {
-
     var that = this;
-
     // getAwardsConfig
-    app.awardsConfig = {
-      chance: true,
-      awards:[
-        { 'index': 0, 'name': '迷你电风扇'},
-        { 'index': 1, 'name': '星空投影灯'},
-        { 'index': 2, 'name': '可爱抱枕'},
-        { 'index': 3, 'name': '七夕玫瑰花'},
-        { 'index': 4, 'name': '感恩毛巾'},
-        {'index': 5, 'name': '谢谢回顾'}
-      ]
-    }
-    
-    // wx.setStorageSync('awardsConfig', JSON.stringify(awardsConfig))
-    
 
-    // 绘制转盘
-    var awardsConfig = app.awardsConfig.awards,
-        len = awardsConfig.length,
-        rotateDeg = 360 / len / 2 + 90,
-        html = [],
-        turnNum = 1 / len  // 文字旋转 turn 值
-    that.setData({
-      btnDisabled: app.awardsConfig.chance ? '' : 'disabled'  
-    })
-    var ctx = wx.createContext()
-    for (var i = 0; i < len; i++) {
-      // 保存当前状态
-      ctx.save();
-      // 开始一条新路径
-      ctx.beginPath();
-      // 位移到圆心，下面需要围绕圆心旋转
-      ctx.translate(150, 150);
-      // 从(0, 0)坐标开始定义一条新的子路径
-      ctx.moveTo(0, 0);
-      // 旋转弧度,需将角度转换为弧度,使用 degrees * Math.PI/180 公式进行计算。
-      ctx.rotate((360 / len * i - rotateDeg) * Math.PI/180);
-      // 绘制圆弧
-      ctx.arc(0, 0, 150, 0,  2 * Math.PI / len, false);
+    wx.request({
+      url: util.host + 'v1/users/prizeFrezzList',
+      success: function (res) {
+        var data = res.data.data;
 
-      // 颜色间隔
-      if (i % 2 == 0) {
-          ctx.setFillStyle('#ffb820');
-      }else{
-          ctx.setFillStyle('#ffcb3f');
+        if (data.length > 0) {
+          var tmpData = [];
+          if (data.length < 6) {
+            var thankyou = 6 - data.length;
+            var j = 0;
+            var thankyouItem = {
+
+              prizeId: '-1',
+              prizeName: '谢谢回顾',
+              prizeImg: '',
+              prizeNumber: 1
+            }
+            for (var i = 0; i < 6; i++) {
+              var tmpItem = data[i];
+              if (thankyou > 0) {
+                if (i % 2 == 0) {
+                  tmpData.push(
+                    thankyouItem
+                  );
+                  if (j < data.length) {
+                    tmpData.push(
+                      data[j]
+                    )
+                    j++;
+                  }
+                  thankyou--;
+                }
+
+
+              } else {
+
+                if (j < data.length) {
+                  tmpData.push(
+                    data[j]
+                  )
+                  j++;
+                }
+
+              }
+
+            }
+          } else {
+            for (var i = 0; i < 6; i++) {
+              var tmpItem = data[i];
+              tmpData.push(
+                data[i]
+              )
+            }
+
+          }
+          thankyou--; 
+
+        }
+        console.log(tmpData)
+        that.setData({
+          awards: tmpData
+        }
+        
+        );
+        console.log("=======11============================")
+        console.log(that.data.awards)
+        app.awardsConfig = {
+          chance: true,
+          awards: that.data.awards
+        }
+
+        // wx.setStorageSync('awardsConfig', JSON.stringify(awardsConfig))
+        console.log("=======22============================")
+        console.log(that.data.awards)
+
+        // 绘制转盘
+        var awardsConfig = app.awardsConfig.awards,
+          len = awardsConfig.length,
+          rotateDeg = 360 / len / 2 + 90,
+          html = [],
+          turnNum = 1 / len  // 文字旋转 turn 值
+        that.setData({
+          btnDisabled: app.awardsConfig.chance ? '' : 'disabled'
+        })
+        var ctx = wx.createContext()
+        console.log("-------->awardsConfig")
+        console.log(that.data.awards)
+        for (var i = 0; i < len; i++) {
+          // 保存当前状态
+          ctx.save();
+          // 开始一条新路径
+          ctx.beginPath();
+          // 位移到圆心，下面需要围绕圆心旋转
+          ctx.translate(150, 150);
+          // 从(0, 0)坐标开始定义一条新的子路径
+          ctx.moveTo(0, 0);
+          // 旋转弧度,需将角度转换为弧度,使用 degrees * Math.PI/180 公式进行计算。
+          ctx.rotate((360 / len * i - rotateDeg) * Math.PI / 180);
+          // 绘制圆弧
+          ctx.arc(0, 0, 150, 0, 2 * Math.PI / len, false);
+
+          // 颜色间隔
+          if (i % 2 == 0) {
+            ctx.setFillStyle('#ffb820');
+          } else {
+            ctx.setFillStyle('#ffcb3f');
+          }
+
+          // 填充扇形
+          ctx.fill();
+          // 绘制边框
+          ctx.setLineWidth(0.2);
+          ctx.setStrokeStyle('#e4370e');
+          ctx.stroke();
+
+          // 恢复前一个状态
+          ctx.restore();
+
+          // 奖项列表
+          html.push({ turn: i * turnNum + 'turn', award: awardsConfig[i].prizeName });
+        }
+        that.setData({
+          awardsList: html
+        });
+
+        wx.drawCanvas({
+          canvasId: 'lotteryCanvas',
+          actions: ctx.getActions()
+        })
+      },
+
+      fail: function (res) {
+        console.log("fail");
+        console.log(res)
       }
-
-      // 填充扇形
-      ctx.fill();
-      // 绘制边框
-      ctx.setLineWidth(0.2);
-      ctx.setStrokeStyle('#e4370e');
-      ctx.stroke();
-
-      // 恢复前一个状态
-      ctx.restore();
-
-      // 奖项列表
-      html.push({turn: i * turnNum + 'turn', award: awardsConfig[i].name});    
-    }
-    that.setData({
-        awardsList: html
-      });
-
-    wx.drawCanvas({
-      canvasId: 'lotteryCanvas',
-      actions: ctx.getActions()
     })
+    
 
   }
 

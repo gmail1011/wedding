@@ -14,13 +14,13 @@ Page({
   loadSocket: function () {
     console.log("======连接====");
     wx.connectSocket({
-      url: 'ws://dengpaoedu.com/weixin/webSocket',
+      url: util.socket+'webWeixinSocket',
       method: "GET",
       success: function (res) {
         console.log("======连接成功");
 
-      },
-      fail: function () {
+      }, 
+      fail: function () { 
         console.log("======连接成功失败");
       } 
     }) 
@@ -40,7 +40,7 @@ Page({
       if (message.anwserType==1){
         console.log("=====11111111111");
         // 选择题
-        wx.navigateTo({
+        wx.navigateTo({ 
           url: '../singleChoiceDetail/singleChoiceDetail?data=' + res.data
         });
 
@@ -59,14 +59,14 @@ Page({
   },
   //事件处理函数
   bindViewTap: function () {
-
     wx.navigateTo({
       url: '../logs/logs'
     })
   },
   playVideo: function (event) {
+    var video = event.currentTarget.dataset.videoid;
     wx.navigateTo({
-      url: '../video/video'
+      url: '../video/video?videoId=' + video
     })
   },
   onLoad: function () {

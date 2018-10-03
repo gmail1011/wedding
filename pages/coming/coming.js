@@ -1,53 +1,46 @@
 //index.js
 var util = require("../../util/util")
+var timer = require('./time.js');
+//获取应用实例
+var util = require('../../util/util.js')
 //获取应用实例
 var app = getApp()
 Page({
   data: {
-    lists: [
-      {
-        videoId:null,
-        videoUrl:null,
-        videoImgUrl:null,
-        videoPlayNumber:12,
-        title: "《高山流水》 - 古筝",
-        videoDescrption:null,
-        videoUploadName: util.ossAliyuncs + "/images/banner6.jpg",
-        videoFavorate:null,
-        videoSpack:0,
-        isVideo: true,
-        createTime:null
-         
-      } 
-    ],
-    controls: true//是否显示播放控件
+    motto: "",
+    end_second: 1538706600,
+    controls: true,//是否显示播放控件,
+    color: util.HSV_to_RGB(100, 200, 100)
   },
   onLoad: function (options) {
+    console.log('onLoad ' + this.end_second);
+    var that = this
 
-    console.log("====222======" + host + "video/list")
-    wx.request({
-      url: util.host +"video/list",
-      data: data,
-      success: (res => {
-        console.log("----------------")
-        console.log(res.data.data)
-        if (res.statusCode === 200) {
-          //200: 服务端业务处理正常结束
+    setInterval(function () {
+      var current = new Date();
+    
+      if (current.getTime() >= that.data.end_second) {
+        var end = new Date();
+        end.setHours(23, 59, 59, 999);
+        that.end_second = end.getTime() + 1;
+      }
+      var diff_time = Math.floor((that.data.end_second - current.getTime()/1000));
+      var days = Math.floor(diff_time / 86400);
+      var timesecodes = diff_time - days * 86400;
+      var hours = Math.floor(timesecodes/ 3600);
+      var minutes = Math.floor((timesecodes / 60) % 60);
+      var seconds = timesecodes % 60;
+      var realTime = days +' 天 '+(hours < 10 ? '0' : '') + hours + ' : ' + (minutes < 10 ? '0' : '') + minutes + ' : ' + (seconds < 10 ? '0' : '') + seconds
 
-          this.globalData.userId = res.data.userId
-        } else {
-          //其它错误，提示用户错误信息
- 
-        }
-      }),
-      fail: (res => {
-        if (this._errorHandler != null) {
-          this._errorHandler(res)
-        }
-        reject(res)
-      })
+      that.setData({
+        motto: realTime
+      });
 
-    })
+      if (seconds%3==0){
+        that.changeColor(hours, minutes, seconds);
+      }
+      
+    }, 1000);
   },
   //下拉刷新
   onPullDownRefresh: function () {
@@ -57,39 +50,20 @@ Page({
   onReachBottom: function () {
 
   },
-  //点击video对象播放当前视频
-  play: function (e) {
-    //当前对象索引
-    var index = e.currentTarget.id.split("-")[1],
-      lists = this.data.lists,
-      video = wx.createVideoContext(e.currentTarget.id);
-    //当前video对象 isPlay设置     
-    lists[index].isPlay = !!lists[index].isPlay ? false : true;
-
-    console.log(lists[index].isPlay)
-
-    //isPlay为true 执行播放操作
-    if (lists[index].isPlay) {
-      //播放当前video对象时其他video对象全部停止
-      lists.forEach(function (item, i) {
-        if (item.isVideo) {
-          var video = wx.createVideoContext("vds-" + i);
-          video.pause();
-          //设置其他其他video对象isPlay为false
-          if (i != index)
-            item.isPlay = false;
-        }
-      });
-      video.play();
-    } else {
-      video.pause();
+  changeColor: function (hours, minutes, seconds) {
+    var h = util.calculate_h(hours, minutes, seconds);
+    var s = util.calculate_s(hours, minutes, seconds);
+    var v = util.calculate_v(hours, minutes, seconds);
+    var font_h = h + 0.5;
+    if (font_h > 1) {
+      font_h -= 1;
     }
-  },
-  //进入详情
-  detail: function (e) {
-    console.log(e.currentTarget.dataset.title)
-    wx.navigateTo({
-      url: '../details/detail?id=' + e.currentTarget.dataset.id + '&title=' + e.currentTarget.dataset.title
+
+    this.setData({
+      color: util.HSV_to_RGB(font_h, s, v),
+      background_color: util.HSV_to_RGB(h, s, v)
     })
   }
+ 
+ 
 })
